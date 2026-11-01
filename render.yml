@@ -25,6 +25,9 @@ services:
         value: gpt-4o-mini
       - key: FALLBACK_MODEL
         value: gpt-4o-mini
+      # PHASE 1 (our addition): no torch on Render free; set cohere + COHERE_API_KEY to rerank
+      - key: RERANKER
+        value: none
       - key: OPENAI_API_KEY
         sync: false  # Must be set manually — NEVER commit secrets
       - key: LANGCHAIN_API_KEY

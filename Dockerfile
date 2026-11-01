@@ -27,6 +27,10 @@ COPY --chown=appuser:appuser app/ app/
 # GLUE (not from course): the corpus that /ingest reads
 COPY --chown=appuser:appuser data/ data/
 
+# PHASE 1 (our addition): the image ships WITHOUT the cross-encoder (torch is ~2 GB). Default to no reranker;
+# to use one, build with `uv sync --frozen --no-dev --extra rerank` and set RERANKER=cross-encoder, or use RERANKER=cohere.
+ENV RERANKER=none
+
 # Expose port
 EXPOSE 8000
 

@@ -27,7 +27,7 @@ from langchain_core.prompts import ChatPromptTemplate
 from langsmith import traceable
 
 from app.config import get_settings
-from app.rag import RAG_PROMPT, REFUSAL, RAGService, format_docs_with_sources
+from app.rag import RAG_PROMPT, REFUSAL, RAGService, Retrieved, format_docs_with_sources
 
 
 # === Agent State ===
@@ -49,6 +49,32 @@ class AgentState(TypedDict):
     documents: list          # list[app.rag.Retrieved]
     relevance_score: float
     llm_input: Optional[list[BaseMessage]]  # what `process`/`fallback` send to the LLM
+    # phase 1: filters + diagnostics
+    doc_types: Optional[list[str]]
+    categories: Optional[list[str]]
+    top_k: Optional[int]
+    ranked: list             # top-k before the refusal gate (for the eval's recall@k)
+    top_score: Optional[float]
+
+
+def source_item(r: Retrieved, n: int, answer: str = "", full: bool = False) -> dict:
+    """GLUE (phase 1): one citation. `cited` = the model wrote [n] in its answer."""
+    m = r.document.metadata
+    return {
+        "n": n,
+        "source": m.get("source", "unknown"),
+        "doc_title": m.get("doc_title", ""),
+        "section": m.get("section", ""),
+        "doc_type": m.get("doc_type", ""),
+        "effective_date": m.get("effective_date", ""),
+        "page": m.get("page"),
+        "score": round(r.score, 4) if r.score is not None else None,
+        "vector_score": round(r.vector_score, 4) if r.vector_score is not None else None,
+        "rerank_score": round(r.rerank_score, 4) if r.rerank_score is not None else None,
+        "cited": f"[{n}]" in answer,
+        "snippet": r.document.page_content[:200],
+        **({"text": r.document.page_content} if full else {}),  # full chunk text (evaluation only)
+    }
 
 
 # GLUE (not from course): prompts copied from part6_advanced/04_agentic_rag.py
@@ -191,7 +217,10 @@ class ProductionAgent:
 
         def retrieve(state: AgentState) -> dict:
             query = state.get("rewritten_query") or state["question"]
-            return {"documents": self.rag.retrieve(query)}
+            res = self.rag.search(
+                query, k=state.get("top_k"), doc_types=state.get("doc_types"), categories=state.get("categories")
+            )
+            return {"documents": res.results, "ranked": res.ranked, "top_score": res.top_score}
 
         def grade(state: AgentState) -> dict:
             """04_agentic_rag.py::grade_documents - LLM scores each chunk, keep >= 0.5."""
@@ -294,7 +323,8 @@ class ProductionAgent:
         return graph.compile()
 
     @traceable(name="production_agent_invoke")
-    def invoke(self, message: str, use_retrieval: bool = False) -> dict:
+    def invoke(self, message: str, use_retrieval: bool = False, doc_types: Optional[list[str]] = None,
+               categories: Optional[list[str]] = None, top_k: Optional[int] = None) -> dict:
         """
         Invoke the agent with a user message.
         Returns: {"response": str, "model_used": str, "error": str | None, ...}
@@ -315,25 +345,27 @@ class ProductionAgent:
             "documents": [],
             "relevance_score": 0.0,
             "llm_input": None,
+            "doc_types": doc_types,
+            "categories": categories,
+            "top_k": top_k,
+            "ranked": [],
+            "top_score": None,
         })
 
         response = result["messages"][-1].content
         # GLUE: don't show sources when the model itself said it doesn't know
-        docs = [] if REFUSAL in str(response) else result.get("documents", [])
+        refused = REFUSAL in str(response)
+        docs = [] if refused else result.get("documents", [])
         return {
             "response": response,
             "model_used": result.get("model_used", "unknown"),
             "error": result.get("error"),
             # GLUE
-            "sources": [
-                {
-                    "source": r.document.metadata.get("source", "unknown"),
-                    "page": (r.document.metadata["page"] + 1)
-                    if isinstance(r.document.metadata.get("page"), int) else None,
-                    "score": round(r.score, 4) if r.score is not None else None,
-                    "snippet": r.document.page_content[:200],
-                }
-                for r in docs
-            ],
+            "sources": [source_item(r, i + 1, str(response)) for i, r in enumerate(docs)],
             "rewritten_query": result.get("rewritten_query") or None,
+            "refused": refused,
+            "top_score": result.get("top_score"),
+            # top-k before the refusal gate, for evaluation (recall@k) and debugging
+            "retrieved": [source_item(r, i + 1, full=True) for i, r in enumerate(result.get("ranked", []))],
+            "context": [r.document.page_content for r in docs],  # what the LLM saw (faithfulness judge)
         }

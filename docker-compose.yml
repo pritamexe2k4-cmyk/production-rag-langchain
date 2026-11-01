@@ -11,6 +11,8 @@ services:
     environment:
       - APP_ENV=production
       - LOG_LEVEL=INFO
+      # PHASE 1 (our addition): image has no torch; use RERANKER=cohere (+ COHERE_API_KEY) for reranking
+      - RERANKER=${RERANKER:-none}
     # GLUE (not from course): keep the Chroma vector DB between container restarts
     volumes:
       - chroma_data:/app/chroma_db

@@ -1,0 +1,709 @@
+[
+ {
+  "id": "f01",
+  "category": "factual",
+  "question": "How many days of Casual Leave does an employee get per year?",
+  "expected_docs": [
+   "Leave_Policy.pdf",
+   "HR_FAQ.md"
+  ],
+  "doc_mode": "any",
+  "must_include": [
+   "8"
+  ],
+  "reference": "8 days of Casual Leave per year, credited on 1 January."
+ },
+ {
+  "id": "f02",
+  "category": "factual",
+  "question": "What is the maximum number of Casual Leave days I can take at a stretch?",
+  "expected_docs": [
+   "Leave_Policy.pdf"
+  ],
+  "doc_mode": "any",
+  "must_include": [
+   "3"
+  ],
+  "reference": "At most 3 days of Casual Leave can be taken at a stretch."
+ },
+ {
+  "id": "f03",
+  "category": "factual",
+  "question": "When do I need a medical certificate for sick leave?",
+  "expected_docs": [
+   "Leave_Policy.pdf"
+  ],
+  "doc_mode": "any",
+  "must_include": [
+   "2 consecutive"
+  ],
+  "reference": "A medical certificate is required when Sick Leave exceeds 2 consecutive days."
+ },
+ {
+  "id": "f04",
+  "category": "factual",
+  "question": "How many weeks of maternity leave are given for the first two children?",
+  "expected_docs": [
+   "Leave_Policy.pdf"
+  ],
+  "doc_mode": "any",
+  "must_include": [
+   "26 weeks"
+  ],
+  "reference": "26 weeks of paid Maternity Leave for the first two children (12 weeks from the third child)."
+ },
+ {
+  "id": "f05",
+  "category": "factual",
+  "question": "How many days of paternity leave are available and within what period must they be taken?",
+  "expected_docs": [
+   "Leave_Policy.pdf"
+  ],
+  "doc_mode": "any",
+  "must_include": [
+   "10",
+   "6 months"
+  ],
+  "reference": "10 working days of paid Paternity Leave, to be taken within 6 months of the birth or adoption."
+ },
+ {
+  "id": "f06",
+  "category": "factual",
+  "question": "How many days of leave do I get for my own marriage?",
+  "expected_docs": [
+   "Leave_Policy.pdf"
+  ],
+  "doc_mode": "any",
+  "must_include": [
+   "5 days"
+  ],
+  "reference": "5 days of paid Marriage Leave, once during service."
+ },
+ {
+  "id": "f07",
+  "category": "factual",
+  "question": "Within how many days must a Compensatory Off be used?",
+  "expected_docs": [
+   "Leave_Policy.pdf"
+  ],
+  "doc_mode": "any",
+  "must_include": [
+   "60 days"
+  ],
+  "reference": "A Comp-Off must be used within 60 days of the date it was earned, otherwise it lapses."
+ },
+ {
+  "id": "f08",
+  "category": "factual",
+  "question": "What is the sandwich rule for leave?",
+  "expected_docs": [
+   "Leave_Policy.pdf"
+  ],
+  "doc_mode": "any",
+  "must_include": [
+   "weekend|weekends",
+   "casual leave|sick leave"
+  ],
+  "reference": "Weekends and company holidays between two days of Casual Leave or Sick Leave are counted as leave; it does not apply to Privilege Leave and the other leave types."
+ },
+ {
+  "id": "f09",
+  "category": "factual",
+  "question": "How far in advance must I apply for Privilege Leave of 5 or more consecutive working days?",
+  "expected_docs": [
+   "Leave_Policy.pdf"
+  ],
+  "doc_mode": "any",
+  "must_include": [
+   "15"
+  ],
+  "reference": "At least 15 calendar days in advance."
+ },
+ {
+  "id": "f10",
+  "category": "factual",
+  "question": "How many days a week must hybrid employees be in the office and which are the anchor days?",
+  "expected_docs": [
+   "Hybrid_Work_and_WFH_Policy.docx",
+   "HR_FAQ.md",
+   "Employee_Handbook.docx"
+  ],
+  "doc_mode": "any",
+  "must_include": [
+   "3",
+   "tuesday",
+   "wednesday"
+  ],
+  "reference": "3 days in the office per week; Tuesday and Wednesday are the anchor days."
+ },
+ {
+  "id": "f11",
+  "category": "factual",
+  "question": "What are the core hours when I must be available online?",
+  "expected_docs": [
+   "Hybrid_Work_and_WFH_Policy.docx",
+   "Employee_Handbook.docx"
+  ],
+  "doc_mode": "any",
+  "must_include": [
+   "11:00",
+   "4:00"
+  ],
+  "reference": "Core hours are 11:00 AM to 4:00 PM IST."
+ },
+ {
+  "id": "f12",
+  "category": "factual",
+  "question": "How much is the monthly broadband allowance for hybrid employees?",
+  "expected_docs": [
+   "Hybrid_Work_and_WFH_Policy.docx",
+   "Expense_and_Travel_Reimbursement_Policy.md"
+  ],
+  "doc_mode": "any",
+  "must_include": [
+   "1,000"
+  ],
+  "reference": "Rs 1,000 per month against the broadband bill."
+ },
+ {
+  "id": "f13",
+  "category": "factual",
+  "question": "For how many days a year can I work from another city in India?",
+  "expected_docs": [
+   "Hybrid_Work_and_WFH_Policy.docx",
+   "HR_FAQ.md"
+  ],
+  "doc_mode": "any",
+  "must_include": [
+   "20"
+  ],
+  "reference": "Up to 20 working days in a calendar year, with the manager's prior approval, within India only."
+ },
+ {
+  "id": "f14",
+  "category": "factual",
+  "question": "Within how many days must a conflict of interest be disclosed?",
+  "expected_docs": [
+   "Code_of_Conduct.pdf"
+  ],
+  "doc_mode": "any",
+  "must_include": [
+   "7 days"
+  ],
+  "reference": "Within 7 days of becoming aware of it, in writing to the manager and the Ethics Office."
+ },
+ {
+  "id": "f15",
+  "category": "factual",
+  "question": "What is the phone number of the Ethics Helpline?",
+  "expected_docs": [
+   "Code_of_Conduct.pdf",
+   "HR_FAQ.md",
+   "Employee_Handbook.docx"
+  ],
+  "doc_mode": "any",
+  "must_include": [
+   "1800-000-1234"
+  ],
+  "reference": "1800-000-1234."
+ },
+ {
+  "id": "f16",
+  "category": "factual",
+  "question": "Who is the Presiding Officer of the Internal Committee?",
+  "expected_docs": [
+   "POSH_Policy.docx"
+  ],
+  "doc_mode": "any",
+  "must_include": [
+   "kavitha rao"
+  ],
+  "reference": "Ms. Kavitha Rao, Director, Customer Success."
+ },
+ {
+  "id": "f17",
+  "category": "factual",
+  "question": "Within how many months of the incident must a sexual harassment complaint be filed?",
+  "expected_docs": [
+   "POSH_Policy.docx"
+  ],
+  "doc_mode": "any",
+  "must_include": [
+   "3 months"
+  ],
+  "reference": "Within 3 months of the incident, extendable by another 3 months by the Internal Committee."
+ },
+ {
+  "id": "f18",
+  "category": "factual",
+  "question": "How long does the Internal Committee have to complete a POSH inquiry?",
+  "expected_docs": [
+   "POSH_Policy.docx"
+  ],
+  "doc_mode": "any",
+  "must_include": [
+   "90 days"
+  ],
+  "reference": "Within 90 days."
+ },
+ {
+  "id": "f19",
+  "category": "factual",
+  "question": "How soon after incurring an expense must I submit the claim?",
+  "expected_docs": [
+   "Expense_and_Travel_Reimbursement_Policy.md",
+   "HR_FAQ.md"
+  ],
+  "doc_mode": "any",
+  "must_include": [
+   "30 days"
+  ],
+  "reference": "Within 30 days of the date of the expense."
+ },
+ {
+  "id": "f20",
+  "category": "factual",
+  "question": "What is the reimbursement rate per km for using my own car for official work?",
+  "expected_docs": [
+   "Expense_and_Travel_Reimbursement_Policy.md"
+  ],
+  "doc_mode": "any",
+  "must_include": [
+   "9",
+   "km"
+  ],
+  "reference": "Rs 9 per km for a car (Rs 4 per km for a two-wheeler)."
+ },
+ {
+  "id": "f21",
+  "category": "factual",
+  "question": "How long is the probation period for a new employee?",
+  "expected_docs": [
+   "Employee_Handbook.docx",
+   "New_Joiner_Onboarding_Guide.html"
+  ],
+  "doc_mode": "any",
+  "must_include": [
+   "6 months|six months"
+  ],
+  "reference": "6 months."
+ },
+ {
+  "id": "f22",
+  "category": "factual",
+  "question": "How much do the employee and the employer each contribute to the Provident Fund?",
+  "expected_docs": [
+   "Compensation_and_Payroll_Policy.md",
+   "Employee_Benefits_and_Insurance_Guide.docx"
+  ],
+  "doc_mode": "any",
+  "must_include": [
+   "12%"
+  ],
+  "reference": "12% of the Basic salary each."
+ },
+ {
+  "id": "f23",
+  "category": "factual",
+  "question": "Does Acme provide a creche or childcare reimbursement?",
+  "expected_docs": [
+   "Employee_Benefits_and_Insurance_Guide.docx",
+   "HR_FAQ.md"
+  ],
+  "doc_mode": "any",
+  "must_include": [
+   "no"
+  ],
+  "reference": "No. There is currently no creche facility and no childcare reimbursement."
+ },
+ {
+  "id": "t01",
+  "category": "table",
+  "question": "How many days of Privilege Leave does a Band C employee get per year?",
+  "expected_docs": [
+   "Leave_Policy.pdf",
+   "HR_FAQ.md"
+  ],
+  "doc_mode": "any",
+  "must_include": [
+   "22"
+  ],
+  "reference": "22 days per year."
+ },
+ {
+  "id": "t02",
+  "category": "table",
+  "question": "What is the maximum Privilege Leave carry-forward for a Band D employee?",
+  "expected_docs": [
+   "Leave_Policy.pdf",
+   "HR_FAQ.md"
+  ],
+  "doc_mode": "any",
+  "must_include": [
+   "45"
+  ],
+  "reference": "45 days."
+ },
+ {
+  "id": "t03",
+  "category": "table",
+  "question": "What is the hotel limit per night in a metro city for a Band B employee?",
+  "expected_docs": [
+   "Expense_and_Travel_Reimbursement_Policy.md"
+  ],
+  "doc_mode": "any",
+  "must_include": [
+   "6,000"
+  ],
+  "reference": "Rs 6,000 per night."
+ },
+ {
+  "id": "t04",
+  "category": "table",
+  "question": "What is the daily meal allowance for a Band D employee travelling within India?",
+  "expected_docs": [
+   "Expense_and_Travel_Reimbursement_Policy.md"
+  ],
+  "doc_mode": "any",
+  "must_include": [
+   "1,800"
+  ],
+  "reference": "Rs 1,800 per day of travel."
+ },
+ {
+  "id": "t05",
+  "category": "table",
+  "question": "What is the group medical insurance sum insured for Band C?",
+  "expected_docs": [
+   "Employee_Benefits_and_Insurance_Guide.docx"
+  ],
+  "doc_mode": "any",
+  "must_include": [
+   "7,50,000|7.5 lakh"
+  ],
+  "reference": "Rs 7,50,000 as a family floater."
+ },
+ {
+  "id": "t06",
+  "category": "table",
+  "question": "What is the notice period for a confirmed Band E employee?",
+  "expected_docs": [
+   "Notice_Period_and_Exit_Policy.pdf",
+   "HR_FAQ.md"
+  ],
+  "doc_mode": "any",
+  "must_include": [
+   "120"
+  ],
+  "reference": "120 days."
+ },
+ {
+  "id": "t07",
+  "category": "table",
+  "question": "What is the target variable pay percentage for Band D?",
+  "expected_docs": [
+   "Performance_Review_Policy.md"
+  ],
+  "doc_mode": "any",
+  "must_include": [
+   "18%"
+  ],
+  "reference": "18% of annual fixed pay."
+ },
+ {
+  "id": "t08",
+  "category": "table",
+  "question": "What increment range applies to a performance rating of 4?",
+  "expected_docs": [
+   "Performance_Review_Policy.md"
+  ],
+  "doc_mode": "any",
+  "must_include": [
+   "9",
+   "11"
+  ],
+  "reference": "9% to 11% on fixed pay."
+ },
+ {
+  "id": "t09",
+  "category": "table",
+  "question": "On which date and day of the week is Diwali in 2027?",
+  "expected_docs": [
+   "Holiday_List_2027.html"
+  ],
+  "doc_mode": "any",
+  "must_include": [
+   "29",
+   "october",
+   "friday"
+  ],
+  "reference": "Friday, 29 October 2027 (Lakshmi Puja)."
+ },
+ {
+  "id": "t10",
+  "category": "table",
+  "question": "What is the international hotel limit per night for Band C in US dollars?",
+  "expected_docs": [
+   "Expense_and_Travel_Reimbursement_Policy.md"
+  ],
+  "doc_mode": "any",
+  "must_include": [
+   "200"
+  ],
+  "reference": "USD 200 per night."
+ },
+ {
+  "id": "t11",
+  "category": "table",
+  "question": "How quickly must the security team give a first response to a critical security incident?",
+  "expected_docs": [
+   "IT_Security_and_Acceptable_Use_Policy.pdf"
+  ],
+  "doc_mode": "any",
+  "must_include": [
+   "30 minutes"
+  ],
+  "reference": "Within 30 minutes."
+ },
+ {
+  "id": "m01",
+  "category": "multi_doc",
+  "question": "I am a Senior Manager. How many days of Privilege Leave do I get and what is my notice period?",
+  "expected_docs": [
+   "Employee_Handbook.docx",
+   "Leave_Policy.pdf",
+   "Notice_Period_and_Exit_Policy.pdf"
+  ],
+  "doc_mode": "all",
+  "must_include": [
+   "24",
+   "90"
+  ],
+  "reference": "A Senior Manager is in Band D: 24 days of Privilege Leave per year and a 90-day notice period."
+ },
+ {
+  "id": "m02",
+  "category": "multi_doc",
+  "question": "I am a Lead. What is my health insurance sum insured and my hotel limit per night in Pune?",
+  "expected_docs": [
+   "Employee_Handbook.docx",
+   "Employee_Benefits_and_Insurance_Guide.docx",
+   "Expense_and_Travel_Reimbursement_Policy.md"
+  ],
+  "doc_mode": "all",
+  "must_include": [
+   "7,50,000|7.5 lakh",
+   "8,000"
+  ],
+  "reference": "A Lead is in Band C: sum insured Rs 7,50,000; Pune is a metro city, so the hotel limit is Rs 8,000 per night."
+ },
+ {
+  "id": "m03",
+  "category": "multi_doc",
+  "question": "What is the maximum Privilege Leave I can carry forward as a Senior Analyst?",
+  "expected_docs": [
+   "Employee_Handbook.docx",
+   "Leave_Policy.pdf"
+  ],
+  "doc_mode": "all",
+  "must_include": [
+   "30"
+  ],
+  "reference": "A Senior Analyst is in Band B: maximum carry-forward is 30 days."
+ },
+ {
+  "id": "m04",
+  "category": "multi_doc",
+  "question": "For a Director, what is the target variable pay percentage and when is it paid?",
+  "expected_docs": [
+   "Employee_Handbook.docx",
+   "Performance_Review_Policy.md"
+  ],
+  "doc_mode": "all",
+  "must_include": [
+   "18%",
+   "june"
+  ],
+  "reference": "A Director is in Band D: 18% of annual fixed pay target, paid with the June payroll."
+ },
+ {
+  "id": "m05",
+  "category": "multi_doc",
+  "question": "How many paid company holidays do we get in 2027 and how many days of Casual Leave on top of that?",
+  "expected_docs": [
+   "Holiday_List_2027.html",
+   "Leave_Policy.pdf"
+  ],
+  "doc_mode": "all",
+  "must_include": [
+   "11",
+   "8"
+  ],
+  "reference": "11 company holidays (plus 2 optional holidays) and 8 days of Casual Leave per year."
+ },
+ {
+  "id": "m06",
+  "category": "multi_doc",
+  "question": "When does my family's health insurance cover end if I leave, and can I continue it?",
+  "expected_docs": [
+   "Employee_Benefits_and_Insurance_Guide.docx",
+   "Notice_Period_and_Exit_Policy.pdf"
+  ],
+  "doc_mode": "any",
+  "must_include": [
+   "last working day",
+   "30 days"
+  ],
+  "reference": "Cover ends on the last working day; the employee can ask the insurer for portability within 30 days."
+ },
+ {
+  "id": "m07",
+  "category": "multi_doc",
+  "question": "Whom do I write to about a salary error and within how many days must I report it?",
+  "expected_docs": [
+   "Compensation_and_Payroll_Policy.md"
+  ],
+  "doc_mode": "any",
+  "must_include": [
+   "payroll@acme-analytics.example",
+   "30 days"
+  ],
+  "reference": "Write to payroll@acme-analytics.example within 30 days."
+ },
+ {
+  "id": "m08",
+  "category": "multi_doc",
+  "question": "Can I work from a cafe on public Wi-Fi when working remotely?",
+  "expected_docs": [
+   "Hybrid_Work_and_WFH_Policy.docx",
+   "IT_Security_and_Acceptable_Use_Policy.pdf"
+  ],
+  "doc_mode": "any",
+  "must_include": [
+   "vpn"
+  ],
+  "reference": "Only with the company VPN switched on; public Wi-Fi must not be used for work without the VPN."
+ },
+ {
+  "id": "m09",
+  "category": "multi_doc",
+  "question": "Where do I report sexual harassment versus other ethics violations?",
+  "expected_docs": [
+   "POSH_Policy.docx",
+   "Code_of_Conduct.pdf",
+   "HR_FAQ.md",
+   "Employee_Handbook.docx"
+  ],
+  "doc_mode": "any",
+  "must_include": [
+   "internal committee",
+   "ethics"
+  ],
+  "reference": "Sexual harassment goes to the Internal Committee (ic@acme-analytics.example); other ethics concerns go to the Ethics Helpline (ethics@acme-analytics.example, 1800-000-1234)."
+ },
+ {
+  "id": "m10",
+  "category": "multi_doc",
+  "question": "When will I receive my relieving letter and what happens to my system access on my last day?",
+  "expected_docs": [
+   "Notice_Period_and_Exit_Policy.pdf",
+   "IT_Security_and_Acceptable_Use_Policy.pdf"
+  ],
+  "doc_mode": "any",
+  "must_include": [
+   "10 working days",
+   "6:00 pm"
+  ],
+  "reference": "The relieving letter is issued within 10 working days of the last working day; access to systems is switched off at 6:00 PM on the last working day."
+ },
+ {
+  "id": "o01",
+  "category": "out_of_scope",
+  "question": "What is the current stock price of Acme Analytics?",
+  "expected_docs": [],
+  "doc_mode": "any",
+  "must_include": [],
+  "reference": "Not in the HR documents; the assistant must refuse."
+ },
+ {
+  "id": "o02",
+  "category": "out_of_scope",
+  "question": "Does Acme offer an employee stock option plan and how many options will I get?",
+  "expected_docs": [],
+  "doc_mode": "any",
+  "must_include": [],
+  "reference": "Not in the HR documents; the assistant must refuse."
+ },
+ {
+  "id": "o03",
+  "category": "out_of_scope",
+  "question": "Who is the CEO of Acme Analytics?",
+  "expected_docs": [],
+  "doc_mode": "any",
+  "must_include": [],
+  "reference": "Not in the HR documents; the assistant must refuse."
+ },
+ {
+  "id": "o04",
+  "category": "out_of_scope",
+  "question": "What is the dress code at Acme's New York office?",
+  "expected_docs": [],
+  "doc_mode": "any",
+  "must_include": [],
+  "reference": "Not in the HR documents; the assistant must refuse."
+ },
+ {
+  "id": "o05",
+  "category": "out_of_scope",
+  "question": "What is the capital of France?",
+  "expected_docs": [],
+  "doc_mode": "any",
+  "must_include": [],
+  "reference": "Not in the HR documents; the assistant must refuse."
+ },
+ {
+  "id": "o06",
+  "category": "out_of_scope",
+  "question": "How do I reset my Netflix password?",
+  "expected_docs": [],
+  "doc_mode": "any",
+  "must_include": [],
+  "reference": "Not in the HR documents; the assistant must refuse."
+ },
+ {
+  "id": "o07",
+  "category": "out_of_scope",
+  "question": "What is the monthly salary of a Band C employee?",
+  "expected_docs": [],
+  "doc_mode": "any",
+  "must_include": [],
+  "reference": "Not in the HR documents; the assistant must refuse."
+ },
+ {
+  "id": "o08",
+  "category": "out_of_scope",
+  "question": "How many sick leave days do employees get in Germany?",
+  "expected_docs": [],
+  "doc_mode": "any",
+  "must_include": [],
+  "reference": "Not in the HR documents; the assistant must refuse."
+ },
+ {
+  "id": "o09",
+  "category": "out_of_scope",
+  "question": "Can you write a Python script that sorts a list?",
+  "expected_docs": [],
+  "doc_mode": "any",
+  "must_include": [],
+  "reference": "Not in the HR documents; the assistant must refuse."
+ },
+ {
+  "id": "o10",
+  "category": "out_of_scope",
+  "question": "What is the company policy on cryptocurrency investments by employees?",
+  "expected_docs": [],
+  "doc_mode": "any",
+  "must_include": [],
+  "reference": "Not in the HR documents; the assistant must refuse."
+ }
+]

@@ -32,11 +32,20 @@ dependencies = [
     "tiktoken>=0.12.0",              # + part6 (long context / late chunking)
     "openai>=2.32.0",                # + part6
     "langchain-text-splitters>=1.1.2",  # + part6
+    "python-docx>=1.1.2",            # + phase 1: DOCX loader (HR corpus)
+    "httpx>=0.28.1",                 # + phase 1: Cohere rerank option (also used by tests)
+    "pdfplumber>=0.11.10",
 ]
+
+[project.optional-dependencies]
+# + phase 1: local cross-encoder reranker. Pulls PyTorch (large). Install with:
+#   uv sync --extra rerank
+rerank = ["sentence-transformers>=5.0.0"]
 
 [dependency-groups]
 dev = [
     "httpx>=0.28.1",                 # + TestClient for tests/test_api.py (lang-production-api dev dep)
+    "reportlab>=4.2",                # + phase 1: only used by scripts/build_hr_corpus.py to render PDFs
 ]
 
 [tool.pytest.ini_options]

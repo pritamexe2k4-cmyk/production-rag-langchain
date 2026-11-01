@@ -240,13 +240,18 @@ async def health():
         "cache": cache is not None,
         "vector_store": rag is not None,  # GLUE (not from course)
     }
+    extra = {  # GLUE (phase 1): what the retrieval layer is running with
+        "chunks": rag.count() if rag else 0,
+        "hybrid_search": settings.hybrid_search,
+        "reranker": (rag.reranker.name if rag and rag.reranker else "none"),
+    }
 
     all_healthy = all(checks.values())
 
     return HealthResponse(
         status="healthy" if all_healthy else "degraded",
         environment=settings.app_env,
-        checks=checks,
+        checks={**checks, **extra},
     )
 
 
@@ -287,7 +292,7 @@ async def ingest(
     """
     _check_ingest_key(x_api_key)
     try:
-        stats = rag.ingest(body.path)
+        stats = rag.ingest(body.path, force=body.force, prune=body.prune)
     except FileNotFoundError:
         raise HTTPException(status_code=404, detail="File or folder not found in data directory")
     except ValueError as e:
@@ -326,7 +331,9 @@ async def query(request: Request, body: QueryRequest):
                 detail="Your message was blocked by our security filters.",
             )
 
-        cache_key = "rag::" + cleaned  # keep separate from /chat answers
+        cache_key = "rag::" + json.dumps(  # separate from /chat answers; filters are part of the key
+            [cleaned, sorted(body.doc_types or []), sorted(body.categories or []), body.top_k]
+        )
         cached = cache.get(cache_key)
         if cached is not None:
             metrics.record_request(latency_ms=0, cache_hit=True)
@@ -334,6 +341,7 @@ async def query(request: Request, body: QueryRequest):
             return QueryResponse(
                 answer=payload["answer"],
                 sources=[SourceItem(**s) for s in payload["sources"]],
+                refused=payload.get("refused", False),
                 thread_id=body.thread_id,
                 model_used="cache",
                 cached=True,
@@ -341,7 +349,9 @@ async def query(request: Request, body: QueryRequest):
             )
 
         try:
-            result = agent.invoke(cleaned, use_retrieval=True)
+            result = agent.invoke(
+                cleaned, use_retrieval=True, doc_types=body.doc_types, categories=body.categories, top_k=body.top_k
+            )
         except Exception as e:
             logger.error(f"RAG invocation failed: {e}", extra={"extra_data": {"error": str(e)}})
             metrics.record_request(latency_ms=0, error=True)
@@ -354,7 +364,7 @@ async def query(request: Request, body: QueryRequest):
         security_notes.extend(output_warnings)
         # only cache real answers, not the error-handler apology
         if result["model_used"] != "error_handler":
-            cache.set(cache_key, json.dumps({"answer": answer, "sources": result["sources"]}))
+            cache.set(cache_key, json.dumps({"answer": answer, "sources": result["sources"], "refused": result["refused"]}))
 
     metrics.record_request(
         latency_ms=timer.elapsed_ms,
@@ -369,6 +379,13 @@ async def query(request: Request, body: QueryRequest):
         model_used=result["model_used"],
         cached=False,
         rewritten_query=result["rewritten_query"],
+        refused=result["refused"],
         processing_time_ms=round(timer.elapsed_ms, 2),
         security_notes=security_notes,
     )
+
+
+@app.get("/documents")
+async def documents():
+    """GLUE (phase 1): what is in the index (from the ingest manifest): title, type, category, effective date, chunks."""
+    return {"documents": rag.list_documents(), "total_chunks": rag.count()}

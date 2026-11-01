@@ -12,6 +12,7 @@ os.environ["OPENAI_API_KEY"] = "sk-test-not-real"
 os.environ["LANGCHAIN_TRACING_V2"] = "false"
 os.environ["LANGSMITH_TRACING"] = "false"
 os.environ["RATE_LIMIT"] = "1000/minute"
+os.environ["RERANKER"] = "none"
 os.environ.pop("LANGCHAIN_API_KEY", None)
 
 import pytest
@@ -22,6 +23,29 @@ from langchain_core.outputs import ChatGeneration, ChatResult
 
 
 CALLS: list = []  # every prompt the fake LLM received (reset per test)
+EMBED_CALLS: list = []  # size of every embed_documents() batch (reset per test)
+ROOT = __import__("pathlib").Path(__file__).resolve().parents[1]
+DEMO_PATH = "docs/langchain_demo.pdf"   # relative to data/
+DEMO_FILE = "langchain_demo.pdf"
+HR_PATH = "hr_docs"
+
+
+class CountingEmbeddings(DeterministicFakeEmbedding):
+    """Fake embeddings that remember how many texts were embedded per call."""
+
+    def embed_documents(self, texts):
+        EMBED_CALLS.append(len(texts))
+        return super().embed_documents(texts)
+
+
+class FakeReranker:
+    """Deterministic stand-in for the cross-encoder: score = share of query words found in the chunk."""
+
+    name = "fake-reranker"
+
+    def score(self, query, texts):
+        q = set(__import__("re").findall(r"[a-z0-9]+", query.lower()))
+        return [len(q & set(__import__("re").findall(r"[a-z0-9]+", t.lower()))) / max(len(q), 1) for t in texts]
 
 
 class FakeChat(BaseChatModel):
@@ -54,13 +78,20 @@ def _fakes(monkeypatch, tmp_path):
     from app.config import get_settings
 
     CALLS.clear()
-    monkeypatch.setattr(rag_mod, "OpenAIEmbeddings", lambda **kw: DeterministicFakeEmbedding(size=64))
+    EMBED_CALLS.clear()
+    monkeypatch.setattr(rag_mod, "OpenAIEmbeddings", lambda **kw: CountingEmbeddings(size=64))
     monkeypatch.setattr(agent_mod, "ChatOpenAI", lambda **kw: FakeChat())
 
     s = get_settings()
     monkeypatch.setattr(s, "chroma_dir", str(tmp_path / "chroma"))
-    monkeypatch.setattr(s, "data_dir", str(__import__("pathlib").Path(__file__).resolve().parents[1] / "data" / "docs"))
+    monkeypatch.setattr(s, "data_dir", str(__import__("pathlib").Path(__file__).resolve().parents[1] / "data"))
     monkeypatch.setattr(s, "hybrid_search", False)
+    monkeypatch.setattr(s, "reranker", "none")  # phase 1: no model download in tests; reranker tests inject a fake
+    monkeypatch.setattr(s, "rerank_min_score", 0.02)
+    monkeypatch.setattr(s, "retrieval_k", 5)
+    monkeypatch.setattr(s, "candidates", 20)
+    monkeypatch.setattr(s, "chunk_size", 1000)
+    monkeypatch.setattr(s, "chunk_overlap", 100)
     monkeypatch.setattr(s, "agentic_retrieval", False)
     monkeypatch.setattr(s, "ingest_api_key", "")
     monkeypatch.setattr(s, "min_relevance_score", 0.0)
