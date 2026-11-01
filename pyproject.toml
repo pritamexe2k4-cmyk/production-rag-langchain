@@ -1,7 +1,11 @@
+# Base = production-course-main-code/pyproject.toml (course dependency list).
+# GLUE (not from course): the lines marked "+" were added so one environment runs
+# every part: the lang-production-api app (langsmith, pydantic-settings, slowapi)
+# and the Part 6 scripts (networkx, tiktoken, openai, langchain-text-splitters).
 [project]
-name = "langc-course"
+name = "production-rag-langchain"
 version = "0.1.0"
-description = "Add your description here"
+description = "Production RAG assembled from the freeCodeCamp / Paulo Dichone course code"
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
@@ -21,4 +25,22 @@ dependencies = [
     "pytest>=9.0.2",
     "fastapi>=0.129.0",
     "uvicorn>=0.40.0",
+    "langsmith>=0.7.4",              # + app/ (lang-production-api)
+    "pydantic-settings>=2.13.1",     # + app/ (lang-production-api)
+    "slowapi>=0.1.9",                # + app/ (lang-production-api)
+    "networkx>=3.6.1",               # + part6 (GraphRAG)
+    "tiktoken>=0.12.0",              # + part6 (long context / late chunking)
+    "openai>=2.32.0",                # + part6
+    "langchain-text-splitters>=1.1.2",  # + part6
 ]
+
+[dependency-groups]
+dev = [
+    "httpx>=0.28.1",                 # + TestClient for tests/test_api.py (lang-production-api dev dep)
+]
+
+[tool.pytest.ini_options]
+# GLUE (not from course): only run our tests; part*/ scripts are learning references
+# (testing_patterns.py contains course-style tests and can be run explicitly).
+testpaths = ["tests"]
+pythonpath = ["."]

@@ -1,0 +1,10 @@
+[
+  {"id": "pdf-loader", "question": "Which LangChain loader loads PDF files page by page with metadata?", "expected_contains": ["PyPDFLoader"], "answerable": true},
+  {"id": "large-sets", "question": "What should I use instead of load() when processing large document sets?", "expected_contains": ["lazy_load"], "answerable": true},
+  {"id": "splitter", "question": "Which splitter does the document recommend using after loading documents?", "expected_contains": ["RecursiveCharacterTextSplitter"], "answerable": true},
+  {"id": "web-loader", "question": "Which loader can scrape and load web pages?", "expected_contains": ["WebBaseLoader"], "answerable": true},
+  {"id": "why-langchain", "question": "What was LangChain created to simplify?", "expected_contains": ["LLM-powered applications", "development"], "answerable": true},
+  {"id": "preprocessing", "question": "What does the document say about preprocessing?", "expected_contains": ["normalize"], "answerable": true},
+  {"id": "out-of-scope-1", "question": "What is the current stock price of OpenAI?", "expected_contains": [], "answerable": false},
+  {"id": "out-of-scope-2", "question": "How do I deploy LangChain to AWS Lambda?", "expected_contains": [], "answerable": false}
+]
